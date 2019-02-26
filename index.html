@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> invoice</title>
+    
+    <style>
+    .invoice-box {
+        max-width: 800px;
+        margin: auto;
+        padding: 30px;
+        border: 1px solid #eee;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+        font-size: 15px;
+        line-height: 24px;
+        font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        color: #555;
+    }
+    
+    .invoice-box table {
+        width: 100%;
+        line-height: inherit;
+        text-align: left;
+    }
+    
+    .invoice-box table td {
+        padding: 5px;
+        vertical-align: top;
+    }
+    
+   
+    .invoice-box table tr.top table td {
+        padding-bottom: 20px;
+    }
+    
+    .invoice-box table tr.top table td.title {
+        font-size: 45px;
+        line-height: 45px;
+        color: #333;
+    }
+    
+    .invoice-box table tr.information table td {
+        padding-bottom: 40px;
+    }
+    
+    .invoice-box table tr.heading td {
+        background: #eee;
+        border-bottom: 1px solid #ddd;
+        font-weight: bold;
+    }
+    
+    .invoice-box table tr.details td {
+        padding-bottom: 20px;
+    }
+    
+    .invoice-box table tr.item td{
+        border-bottom: 1px solid #eee;
+    }
+    
+    .invoice-box table tr.last td {
+        font-size: 14px;
+        padding: 2px;
+    }
+    
+    .invoice-box table tr.total{
+        border-top: 2px solid #eee;
+        font-weight: bold;
+        /* text-align: right; */
+        color: green;
+        background-color: oldlace;
+    }
+    
+    @media only screen and (max-width: 600px) {
+        .invoice-box table tr.top table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+        
+        .invoice-box table tr.information table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+    }
+    
+    </style>
+</head>
+
+<body>
+                
+    <div class="invoice-box ">
+                {{#each data}}
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="2">
+                    <table>
+                         {{#orderList}}
+                        <tr>
+                            
+                            <td style="padding-top: 80px;">
+
+                                Order No:<b>#{{orderNo}}</b><br>
+                                Order placed at:<b> {{placedAt}}</b><br>
+                                Order delivered at:<b> {{deliveredAt}}</b>
+                            </td>
+
+                            <td style="text-align:right">
+                                    <!-- <img src="logo1.jpg" style="width:100%;height: 70%; max-width:300px;"> -->
+                                </td>
+                        </tr>
+                        {{/orderList}}
+                    </table>
+                </td>
+            </tr>
+            
+            <tr class="information">
+                <td colspan="4">
+                    <table>
+                           
+                        <tr>
+                            <td>
+                                {{#clientList}}
+                                 Ordered from:<br>
+                                 <b> {{Name}}</b><br>
+                                <span style="color:grey"> {{Location}}</span>
+                                {{/clientList}}
+                            </td>
+                            
+                            <td style="padding-left:200px;" >
+                           {{#customerList}}
+                             Delivery To:<br>
+                             <b>{{Name}}</b><br>
+                            <span style="color:grey">{{Location}}</span>
+                             {{/customerList}}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            
+        
+            <tr class="heading">
+                  
+                <td>
+                    Item
+                </td>
+                <td>
+                    Quantity
+                </td>
+                <td>
+                    Price
+                </td>
+            </tr>
+            {{#orderList}}
+            {{#each items}}
+            <tr class="item">
+                        
+                <td>
+                       {{itemName}}
+                </td>
+                
+                <td>
+                   {{itemQty}}
+                </td>
+
+                <td>
+                   ₹ {{itemPrice}}
+                </td>
+               
+            </tr>
+            {{/each}}
+            {{/orderList}}
+            <tr class="last">
+                    <td></td>
+                    <td>Item Total:</td>
+                    
+                    <td>
+                            ₹ 1
+                    </td>
+                </tr>
+                <tr class="last">
+                        <td></td>
+                        <td> GST:</td>
+                        
+                        <td>
+                                ₹ 1
+                        </td>
+                    </tr>
+                    <tr class="last">
+                            <td></td>
+                            <td> Order packing charges:</td>
+                            
+                            <td>
+                                    ₹ 1
+                            </td>
+                        </tr>
+                        <tr class="last">
+                                <td></td>
+                                <td> Delivery Charges:</td>
+                                
+                                <td>
+                                        ₹ 1
+                                </td>
+                            </tr>
+            
+            <tr class="total">
+                <td></td>
+                <td> Total:</td>
+                
+                <td>
+                        ₹ 203
+                </td>
+            </tr>
+        </table>
+        {{/each}}
+    </div>
+</body>
+</html>
